@@ -1,0 +1,23 @@
+.header {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-row: 1;
+    grid-column: 1/4;
+    height: 10rem;
+    margin-bottom: 1rem;
+}
+
+.logo {
+    grid-row: 1;
+    grid-column: 1/4;
+    width: 5rem;
+}
+
+.title {
+    grid-row: 2;
+    grid-column: 1/4;
+    color: rgb(44, 42, 42);
+    font-size: 1rem;
+    font-weight: 500;
+}

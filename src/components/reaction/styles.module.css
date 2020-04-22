@@ -1,0 +1,23 @@
+.reaction {
+    grid-row: 3;
+    grid-column: 3;
+    background-color: rgb(4, 56, 134);
+    width: 100%;
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+}
+
+.button {
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+    padding: 1rem;
+    outline: none;
+    cursor: pointer;
+}
+
+.button:active {
+    opacity: 50%;
+}
