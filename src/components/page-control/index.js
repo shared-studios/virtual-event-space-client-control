@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './styles.module.css'
 import Authentication from '../authentication'
-import AgendaControl from '../agendas'
-import StudentControl from '../students'
+import AgendaControl from '../control-agendas'
+import StudentControl from '../control-students'
 import { useSelector, useDispatch } from 'react-redux'
 import { publishAll } from '../actions/publish'
 

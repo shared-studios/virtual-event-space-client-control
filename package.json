@@ -1,8 +1,8 @@
 {
-  "name": "virtual-event-space-client",
+  "name": "virtual-event-space-client-control",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://shared-studios.github.io/virtual-event-space-client",
+  "homepage": "https://shared-studios.github.io/virtual-event-space-client-control",
   "dependencies": {
     "axios": "^0.19.2",
     "moment": "^2.24.0",

@@ -1,9 +1,8 @@
 import React from 'react'
-// import styles from './styles.module.css'
 import Authentication from '../authentication'
 import Socket from '../socket'
 import { useSelector } from 'react-redux'
-import MessagesList from '../message-list'
+import MessagesList from '../approve-messages'
 
 const ApproveMessage = (props) => {
     const { event_id, user_id } = props.match.params

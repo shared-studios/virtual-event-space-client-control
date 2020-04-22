@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import styles from './styles.module.css'
-import Message from '../message'
+import Message from '../approve-message'
 import { fetchMessages, newApproveMessage } from '../actions/message'
 import { useDispatch, useSelector } from 'react-redux'
 
