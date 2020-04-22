@@ -5,36 +5,12 @@
     display: grid;
     justify-items: flex-start;
     justify-content: left;
-}
-
-.message:last-child {
-    margin-bottom: 5rem;
+    align-items: center;
 }
 
 .text {
     grid-column: 2;
     grid-row: 1;
-    padding: 0.5rem 1rem 0.5rem 1rem;
-    background-color: rgb(167, 167, 167);
-    border-radius: 1rem 1rem 1rem 0;
-    color: rgb(255, 255, 255);
-    font-size: .9rem;
-}
-
-.message_me {
-    padding-left: 20%;
-    height: max-content;
-    margin-bottom: 0.5rem;
-    display: grid;
-    justify-items: flex-end;
-}
-
-.message_me:last-child {
-    margin-bottom: 5rem;
-}
-
-.text_me {
-    grid-column: 2;
     padding: 0.5rem 1rem 0.5rem 1rem;
     background-color: rgb(56, 127, 233);
     border-radius: 1rem 1rem 0 1rem;
@@ -42,25 +18,16 @@
     font-size: .9rem;
 }
 
+.approved {
+    grid-row: 1;
+    grid-column: 1;
+    width: 1rem;
+    height: 1rem;
+}
+
 .user_name {
     grid-column: 2;
     grid-row: 2;
     font-size: 0.7rem;
     color: rgb(199, 199, 199);
-}
-
-.avatar {
-    grid-column: 1;
-    grid-row: 1;
-    width: 2rem;
-    height: 2rem;
-    border: none;
-    border-radius: 100%;
-    background-color: rgb(183, 75, 75);
-    line-height: 2rem;
-    text-align: center;
-    margin-right: 0.3rem;
-    color: rgb(255, 255, 255);
-    font-weight: 400;
-    font-size: 1.1rem;
 }

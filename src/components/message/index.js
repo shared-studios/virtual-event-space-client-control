@@ -1,19 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './styles.module.css'
+import { axios } from '../custom-module'
 
-const Message = ({ msg, name }) => {
-    const { message, user_name } = msg
+const ApproveMessage = ({ msg }) => {
+    const { message, user_name, time_stamp } = msg
+    const [approved, setApproved] = useState(msg.approved)
+
+    const handleChange = (approved) => {
+        axios.patch(`message/${time_stamp}/${approved}`)
+            .then(() => {
+                setApproved(approved)
+            }).catch((error) => {
+                console.log(error)
+            })
+    }
 
     return (
-        <div className={name === user_name ? styles.message_me : styles.message} >
-            {name !== user_name && <div className={styles.avatar}>{user_name.charAt(0).toUpperCase()}</div>}
-            <div className={name === user_name ? styles.text_me : styles.text}>
-                {message}
-                {console.log('message')}
-            </div>
-            {name !== user_name && <div className={styles.user_name}>{user_name}</div>}
+        <div className={styles.message} >
+            {console.log('message')}
+            <input
+                className={styles.approved}
+                type="checkbox"
+                checked={approved}
+                onChange={(e) => handleChange(e.target.checked)}
+            />
+            <div className={styles.text}>{message}</div>
+            <div className={styles.user_name}>{user_name}</div>
         </div >
     )
 }
 
-export default React.memo(Message)
+export default React.memo(ApproveMessage)

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import styles from './styles.module.css'
-import ApproveMessage from '../approve-message'
+import Message from '../message'
 import { fetchMessages, newApproveMessage } from '../actions/message'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -24,7 +24,7 @@ const ApproveMessages = () => {
     return (
         <div className={styles.messages} ref={messageList}>
             {console.log('messagesssss')}
-            {messages.map((message, i) => <ApproveMessage key={i} msg={message} />)}
+            {messages.map((message, i) => <Message key={i} msg={message} />)}
         </div >
     )
 }

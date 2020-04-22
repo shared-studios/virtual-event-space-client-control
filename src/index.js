@@ -3,9 +3,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from "react-redux"
 import store from "./components/store"
-import LandingPage from './components/landing-page'
 import ControlPage from './components/control-page'
-import messageApprovePage from './components/message-approve-page'
+import Header from './components/header'
+import messageApprovePage from './components/approve-page'
 import { Route, HashRouter, Switch } from "react-router-dom"
 import configure from './components/custom-module'
 
@@ -20,10 +20,10 @@ const App = () => {
   return (
     <Provider store={store}>
       <HashRouter>
+        <Header />
         <Switch>
-          <Route path="/:event_id/:user_id" exact component={LandingPage} />
           <Route path="/control/:event_id/:user_id" exact component={ControlPage} />
-          <Route path="/message-approver/:event_id/:user_id" exact component={messageApprovePage} />
+          <Route path="/approver/:event_id/:user_id" exact component={messageApprovePage} />
           <Route path="/" component={Hello} />
         </Switch>
       </HashRouter>

@@ -1,11 +1,11 @@
 import React from 'react'
 import styles from './styles.module.css'
 import Authentication from '../authentication'
-import AgendaControl from '../control-agenda'
-import StudentControl from '../control-student'
+import AgendaControl from '../agendas'
+import StudentControl from '../students'
 import { useSelector, useDispatch } from 'react-redux'
 import { publishAll } from '../actions/publish'
-import logo from './Logo.png'
+
 const ControlPage = (props) => {
     const { event_id, user_id } = props.match.params
     const { agenda, student, disabled, loading } = useSelector(state => state.publish)
@@ -14,9 +14,6 @@ const ControlPage = (props) => {
     return (
         <Authentication eventId={event_id} userId={user_id}>
             {console.log('ControlPage')}
-            <div className={styles.logo}>
-                <img className={styles.logo_image} alt='logo' src={logo} />
-            </div>
             <div className={styles.control_page}>
                 <AgendaControl />
                 <StudentControl />
