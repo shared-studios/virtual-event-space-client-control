@@ -5,7 +5,6 @@
   "homepage": "https://shared-studios.github.io/virtual-event-space-client-control",
   "dependencies": {
     "axios": "^0.19.2",
-    "moment": "^2.24.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",

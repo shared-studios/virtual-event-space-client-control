@@ -1,4 +1,3 @@
-import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import { useSelector, useDispatch } from 'react-redux'
@@ -26,9 +25,9 @@ const AgendaControl = () => {
     return (
         <div className={styles.agenda}>
             {console.log('AgendaControl')}
-            <label className={styles.label}>Agendas: {moment(agenda?.time).format('h:mm a')} {agenda?.title}</label>
+            <label className={styles.label}>Agendas: {agenda?.time} {agenda?.title}</label>
             <select className={styles.select} value={agenda?.index} onChange={handleChange}>
-                {agendas.map(({ index, title }) => <option key={index} value={index}>{moment(agenda?.time).format('h:mm a')} {title}</option>)}
+                {agendas.map(({ index, title }) => <option key={index} value={index}>{agenda?.time} {title}</option>)}
             </select>
         </div>
     )
