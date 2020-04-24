@@ -27,7 +27,7 @@ const AgendaControl = () => {
             {console.log('AgendaControl')}
             <label className={styles.label}>Agendas: {agenda?.time} {agenda?.title}</label>
             <select className={styles.select} value={agenda?.index} onChange={handleChange}>
-                {agendas.map(({ index, title }) => <option key={index} value={index}>{agenda?.time} {title}</option>)}
+                {agendas.map(({ index, title, time }) => <option key={index} value={index}>{time} {title}</option>)}
             </select>
         </div>
     )
