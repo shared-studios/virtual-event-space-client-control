@@ -6,10 +6,10 @@ const ApproveMessage = ({ msg }) => {
     const { message, user_name, time_stamp } = msg
     const [approved, setApproved] = useState(msg.approved)
 
-    const handleChange = (approved) => {
-        axios.patch(`message/${time_stamp}/${approved}`)
+    const handleChange = () => {
+        axios.patch(`message/${time_stamp}/${!approved}`)
             .then(() => {
-                setApproved(approved)
+                setApproved(!approved)
             }).catch((error) => {
                 console.log(error)
             })
@@ -18,13 +18,7 @@ const ApproveMessage = ({ msg }) => {
     return (
         <div className={styles.message} >
             {console.log('message')}
-            <input
-                className={styles.approved}
-                type="checkbox"
-                checked={approved}
-                onChange={(e) => handleChange(e.target.checked)}
-            />
-            <div className={styles.text}>{message}</div>
+            <div className={`${styles.text} ${styles[`${approved ? 'approved' : 'denied'}`]}`} onClick={handleChange}>{message}</div>
             <div className={styles.user_name}>{user_name}</div>
         </div >
     )
