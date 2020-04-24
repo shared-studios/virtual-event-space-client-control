@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0458670f983a35e5d910b222ac1a54c9",
+    "revision": "567f2b6eb6bf70639f4a8bee8949e6a5",
     "url": "/virtual-event-space-client-control/index.html"
   },
   {
-    "revision": "9b3b8c7d0a2d52fef44f",
+    "revision": "b755ae4fd5f321fb4cfb",
     "url": "/virtual-event-space-client-control/static/css/main.bac13b4b.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/virtual-event-space-client-control/static/js/2.fbe6eea6.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9b3b8c7d0a2d52fef44f",
-    "url": "/virtual-event-space-client-control/static/js/main.1864ea37.chunk.js"
+    "revision": "b755ae4fd5f321fb4cfb",
+    "url": "/virtual-event-space-client-control/static/js/main.7e52533d.chunk.js"
   },
   {
     "revision": "557fc7fa3cc567df523d",
