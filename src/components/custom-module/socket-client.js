@@ -23,12 +23,12 @@ export default () => {
         }, options)
     }
 
-    const send = (action, data, call_back) => {
-        if (call_back) {
-            data.call_back = `${action}callback`
-            on(data.call_back, call_back)
-        }
-        socket.send(JSON.stringify({ action, data }))
-    }
-    return { on, send, onError, onDisconnect, onConnect }
+    // const send = (action, data, call_back) => {
+    //     if (call_back) {
+    //         data.call_back = `${action}callback`
+    //         on(data.call_back, call_back)
+    //     }
+    //     socket.send(JSON.stringify({ action, data }))
+    // }
+    return { on, socket, onError, onDisconnect, onConnect }
 }

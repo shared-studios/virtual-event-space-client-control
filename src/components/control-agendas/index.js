@@ -1,34 +1,42 @@
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchAgenda } from '../actions/agenda'
+import { fetchAgendas, updateCurrentAgenda } from '../actions/agendas'
 
 const AgendaControl = () => {
     const [agenda, setAgenda] = useState()
-    const agendas = useSelector(state => state.agendas)
+    const [currentAgenda, setCurrentAgenda] = useState()
+    const { agendas, loading } = useSelector(state => state.agendas)
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(fetchAgenda())
+        dispatch(fetchAgendas())
     }, [dispatch])
 
     useEffect(() => {
         const agenda = agendas.find((agenda) => agenda.status === 'current')
-        setAgenda(agenda)
+        setCurrentAgenda(agenda)
     }, [agendas])
 
     const handleChange = (e) => {
-        setAgenda(agendas[e.target.value])
-        dispatch({ type: "UPDATE-PUBLISH-AGENDA", payload: agendas[e.target.value] })
+        setAgenda(e.target.value)
+    }
+
+    const handlePublish = () => {
+        dispatch(updateCurrentAgenda(agenda))
+        setAgenda()
     }
 
     return (
         <div className={styles.agenda}>
             {console.log('AgendaControl')}
-            <label className={styles.label}>Agendas: {agenda?.time} {agenda?.title}</label>
-            <select className={styles.select} value={agenda?.index} onChange={handleChange}>
-                {agendas.map(({ index, title, time }) => <option key={index} value={index}>{time} {title}</option>)}
+            <label className={styles.label}>Agendas: {currentAgenda?.time} {currentAgenda?.title}</label>
+            <select className={styles.select} value={currentAgenda?.index} onChange={handleChange}>
+                {agendas.map(({ id, title, time }) => <option key={id} value={id}>{time} {title}</option>)}
             </select>
+            <button className={styles.publish_button} onClick={handlePublish} disabled={!agenda}>
+                Publish{loading && '...'}
+            </button>
         </div>
     )
 }

@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from 'react'
 import styles from './styles.module.css'
-import Message from '../approve-message'
-import { fetchMessages, newApproveMessage } from '../actions/message'
+import Comment from '../comment-card'
+import { fetchMessages, newApproveMessage } from '../actions/comments'
 import { useDispatch, useSelector } from 'react-redux'
 
-const ApproveMessages = () => {
+const CommentsList = () => {
     const messageList = useRef()
     const dispatch = useDispatch()
-    const messages = useSelector(state => state.messages)
+    const comments = useSelector(state => state.comments)
     const socket = useSelector(state => state.socket)
 
     useEffect(() => {
@@ -19,14 +19,14 @@ const ApproveMessages = () => {
 
     useEffect(() => {
         messageList.current.scrollTop = messageList.current.scrollHeight
-    }, [messages])
+    }, [comments])
 
     return (
         <div className={styles.messages} ref={messageList}>
-            {console.log('messagesssss')}
-            {messages.map((message, i) => <Message key={i} msg={message} />)}
+            {console.log('comments')}
+            {comments.map((message, i) => <Comment key={i} msg={message} />)}
         </div >
     )
 }
 
-export default React.memo(ApproveMessages)
+export default React.memo(CommentsList)

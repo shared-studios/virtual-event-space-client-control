@@ -1,26 +1,28 @@
-export default (state = [], { type, payload }) => {
+export default (state = { loading: false, disabled: true, agendas: [] }, { type, payload }) => {
     switch (type) {
         case "FETCH-AGENDAS_FULFILLED": {
-            return payload.data
+            return { ...state, agendas: payload.data }
         }
-        case "UPDATE-CURRENT-AGENDA": {
+        case "UPDATE-AGENDA_PENDING": {
+            return { ...state, loading: true, disabled: false, }
+        }
+        case "UPDATE-AGENDA_FULFILLED": {
             if (payload) {
                 let foundCurrent = false
-                const agendas = state.map((agenda) => {
-                    if (agenda.index !== payload && !foundCurrent) {
+                const agendas = state.agendas.map((agenda) => {
+                    if (agenda.id !== payload && !foundCurrent) {
                         return { ...agenda, status: 'previous' }
                     }
-                    if (agenda.index === payload && !foundCurrent) {
+                    if (agenda.id === payload && !foundCurrent) {
                         foundCurrent = true
                         return { ...agenda, status: 'current' }
                     }
                     return { ...agenda, status: 'next' }
                 })
-                return [...agendas]
-            } else {
-                state[0] = { ...state[0], status: 'current' }
-                return [...state]
+                return { ...state, agendas: [...agendas], loading: false, disabled: true }
             }
+            state.agendas[0] = { ...state.agendas[0], status: 'current' }
+            return { ...state, agendas: [...state.agendas], loading: false, disabled: true }
         }
         default: {
             return state

@@ -2,7 +2,7 @@ import React from 'react'
 import Authentication from '../authentication'
 import Socket from '../socket'
 import { useSelector } from 'react-redux'
-import MessagesList from '../approve-messages'
+import CommentsList from '../comments-list'
 
 const ApproveMessage = (props) => {
     const { event_id, user_id } = props.match.params
@@ -12,7 +12,7 @@ const ApproveMessage = (props) => {
         <Authentication eventId={event_id} userId={user_id}>
             <Socket>
                 {console.log('ApproveMessage')}
-                {user.type === 'message-approver' && <MessagesList />}
+                {user.type === 'message-approver' && <CommentsList />}
             </Socket>
         </Authentication>
     )

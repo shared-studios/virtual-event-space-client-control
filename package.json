@@ -4,12 +4,15 @@
   "private": true,
   "homepage": "https://shared-studios.github.io/virtual-event-space-client-control",
   "dependencies": {
+    "@vimeo/player": "^2.11.0",
     "axios": "^0.19.2",
+    "moment": "^2.25.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-spring": "^8.0.27",
     "redux": "^4.0.5",
     "redux-promise-middleware": "^6.1.2",
     "redux-thunk": "^2.3.0"

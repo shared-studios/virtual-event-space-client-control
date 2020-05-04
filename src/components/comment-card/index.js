@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styles from './styles.module.css'
 import { axios } from '../custom-module'
 
-const ApproveMessage = ({ msg }) => {
+const CommentCard = ({ msg }) => {
     const { message, user_name, time_stamp } = msg
     const [approved, setApproved] = useState(msg.approved)
 
@@ -24,4 +24,4 @@ const ApproveMessage = ({ msg }) => {
     )
 }
 
-export default React.memo(ApproveMessage)
+export default React.memo(CommentCard)

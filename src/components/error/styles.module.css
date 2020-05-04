@@ -1,1 +1,32 @@
-.error {}
+.errors {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+}
+
+.error {
+    width: max-content;
+    height: 2.4rem;
+    background-color: #d42000;
+    color: white;
+    padding: 0.1rem 0.5rem;
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    font-size: .9rem;
+    border-radius: 0rem 0.2rem 0.2rem 0rem;
+    margin-bottom: 0.5rem;
+}
+
+.close {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: .5rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.close:active {
+    opacity: 50%;
+}
