@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/virtual-event-space-client-control/static/css/main.bac13b4b.chunk.css",
-    "main.js": "/virtual-event-space-client-control/static/js/main.7e52533d.chunk.js",
-    "main.js.map": "/virtual-event-space-client-control/static/js/main.7e52533d.chunk.js.map",
-    "runtime-main.js": "/virtual-event-space-client-control/static/js/runtime-main.e7289ecf.js",
-    "runtime-main.js.map": "/virtual-event-space-client-control/static/js/runtime-main.e7289ecf.js.map",
-    "static/js/2.fbe6eea6.chunk.js": "/virtual-event-space-client-control/static/js/2.fbe6eea6.chunk.js",
-    "static/js/2.fbe6eea6.chunk.js.map": "/virtual-event-space-client-control/static/js/2.fbe6eea6.chunk.js.map",
+    "main.css": "/virtual-event-space-client-control/static/css/main.999b68c4.chunk.css",
+    "main.js": "/virtual-event-space-client-control/static/js/main.7a9ade41.chunk.js",
+    "main.js.map": "/virtual-event-space-client-control/static/js/main.7a9ade41.chunk.js.map",
+    "runtime-main.js": "/virtual-event-space-client-control/static/js/runtime-main.3df4e139.js",
+    "runtime-main.js.map": "/virtual-event-space-client-control/static/js/runtime-main.3df4e139.js.map",
+    "static/js/2.0bc0d20f.chunk.js": "/virtual-event-space-client-control/static/js/2.0bc0d20f.chunk.js",
+    "static/js/2.0bc0d20f.chunk.js.map": "/virtual-event-space-client-control/static/js/2.0bc0d20f.chunk.js.map",
     "index.html": "/virtual-event-space-client-control/index.html",
-    "precache-manifest.b46551a8564a4114b96b867cb3a910fe.js": "/virtual-event-space-client-control/precache-manifest.b46551a8564a4114b96b867cb3a910fe.js",
+    "precache-manifest.d54b08c6d42fb887b456e985a43c76cc.js": "/virtual-event-space-client-control/precache-manifest.d54b08c6d42fb887b456e985a43c76cc.js",
     "service-worker.js": "/virtual-event-space-client-control/service-worker.js",
-    "static/css/main.bac13b4b.chunk.css.map": "/virtual-event-space-client-control/static/css/main.bac13b4b.chunk.css.map",
-    "static/js/2.fbe6eea6.chunk.js.LICENSE.txt": "/virtual-event-space-client-control/static/js/2.fbe6eea6.chunk.js.LICENSE.txt"
+    "static/css/main.999b68c4.chunk.css.map": "/virtual-event-space-client-control/static/css/main.999b68c4.chunk.css.map",
+    "static/js/2.0bc0d20f.chunk.js.LICENSE.txt": "/virtual-event-space-client-control/static/js/2.0bc0d20f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.e7289ecf.js",
-    "static/js/2.fbe6eea6.chunk.js",
-    "static/css/main.bac13b4b.chunk.css",
-    "static/js/main.7e52533d.chunk.js"
+    "static/js/runtime-main.3df4e139.js",
+    "static/js/2.0bc0d20f.chunk.js",
+    "static/css/main.999b68c4.chunk.css",
+    "static/js/main.7a9ade41.chunk.js"
   ]
 }
