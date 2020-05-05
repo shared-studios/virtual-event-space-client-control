@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './styles.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateVideoOffset } from '../actions/event'
+import { updateVideoOffset, updateVideoOffsetCustom } from '../actions/event'
 import moment from 'moment/moment';
 import Vimeo from '@vimeo/player'
 
@@ -12,8 +12,14 @@ const VideoControl = () => {
     const [selectedField, setSelectedField] = useState()
     const [duration, setDuration] = useState({ 'hr': 0, 'min': 0, 'sec': 0 })
     const event = useSelector(state => state.event)
-    const { video_url, video_offset, loading } = event
+    const { video_url, video_offset, loading, custom_loading } = event
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (player) {
+            player.getCurrentTime().then(updateDuration)
+        }
+    }, [video_offset, player])
 
     useEffect(() => {
         if (video_url) {
@@ -38,7 +44,17 @@ const VideoControl = () => {
     const handlePublish = () => {
         const { hr, min, sec } = duration
         const offset_value = moment.duration({ hours: hr, minutes: min, seconds: sec }).asSeconds()
-        dispatch(updateVideoOffset(segment, offset_value))
+        dispatch(updateVideoOffsetCustom(segment, offset_value))
+    }
+
+    const publishCurrentDuration = () => {
+        player.getCurrentTime().then((duration) => {
+            const hours = moment.duration(duration, 'seconds').hours()
+            const minutes = moment.duration(duration, 'seconds').minutes()
+            const seconds = moment.duration(duration, 'seconds').seconds()
+            const offset_value = moment.duration({ hours, minutes, seconds }).asSeconds()
+            dispatch(updateVideoOffset(segment, offset_value))
+        })
     }
 
     const changeDuration = (operation) => {
@@ -69,36 +85,42 @@ const VideoControl = () => {
                 <option value=''>select a segment...</option>
                 {Object.keys(video_offset).map((segment, i) => <option key={i} value={segment}>{segment}</option>)}
             </select>
-            {segment && <><div className={styles.duration}>
-                <button className={styles.duration_button} onClick={() => changeDuration('sub')}>-</button>
-                <div
-                    className={`${styles.field} ${selectedField === 'hr' && styles.selected_field}`}
-                    onClick={() => setSelectedField('hr')}>
-                    {duration.hr} hr
-            </div>
-                <div
-                    className={`${styles.field} ${selectedField === 'min' && styles.selected_field}`}
-                    onClick={() => setSelectedField('min')}>
-                    {duration.min} min
-            </div>
-                <div
-                    className={`${styles.field} ${selectedField === 'sec' && styles.selected_field}`}
-                    onClick={() => setSelectedField('sec')}>
-                    {duration.sec} sec
-            </div>
-                <button className={styles.duration_button} onClick={changeDuration}>+</button>
-            </div>
+            {segment && <>
                 <button
                     className={`${styles.current_duration} ${styles.button}`}
-                    onClick={() => player.getCurrentTime().then(updateDuration)}>
-                    Current Duration
-            </button>
-                <button
-                    className={`${styles.publish} ${styles.button}`}
-                    onClick={handlePublish}
-                    disabled={!segment}>
-                    Publish{loading && '...'}
+                    onClick={publishCurrentDuration}>
+                    Publish Current Duration{loading && '...'}
                 </button>
+                <div className={styles.duration}>
+                    <button className={styles.duration_button} onClick={() => changeDuration('sub')}>-</button>
+                    <div
+                        className={`${styles.field} ${selectedField === 'hr' && styles.selected_field}`}
+                        onClick={() => setSelectedField('hr')}>
+                        {duration.hr} hr
+                    </div>
+                    <div
+                        className={`${styles.field} ${selectedField === 'min' && styles.selected_field}`}
+                        onClick={() => setSelectedField('min')}>
+                        {duration.min} min
+                    </div>
+                    <div
+                        className={`${styles.field} ${selectedField === 'sec' && styles.selected_field}`}
+                        onClick={() => setSelectedField('sec')}>
+                        {duration.sec} sec
+                    </div>
+                    <button className={styles.duration_button} onClick={changeDuration}>+</button>
+                    <button
+                        className={`${styles.get_current_duration} ${styles.button}`}
+                        onClick={() => player.getCurrentTime().then(updateDuration)}>
+                        Get Current Duration
+                    </button>
+                    <button
+                        className={`${styles.publish} ${styles.button}`}
+                        onClick={handlePublish}
+                        disabled={!segment}>
+                        Publish{custom_loading && '...'}
+                    </button>
+                </div>
             </>}
         </div>
     )

@@ -44,16 +44,11 @@
 }
 
 .current_duration {
-    background-color: rgb(231, 76, 76);
-}
-
-.publish {
     background-color: rgb(4, 169, 4);
 }
 
 .duration {
     width: max-content;
-    height: 3rem;
     display: grid;
     grid-auto-flow: column;
     margin-top: 1rem;
@@ -97,4 +92,16 @@
 
 .selected_field {
     border: 0.1rem solid rgba(10, 160, 204, 0.2);
+}
+
+.get_current_duration {
+    grid-column: 1/6;
+    grid-row: 2;
+    background-color: rgb(231, 76, 76);
+}
+
+.publish {
+    grid-column: 1/6;
+    grid-row: 3;
+    background-color: rgb(4, 169, 4);
 }
