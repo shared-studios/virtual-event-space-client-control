@@ -1,35 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { socket } from '../custom-module'
-import { createSocket } from '../actions/socket'
-import { useDispatch } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { onMessage, onError, onConnect } from '../actions/socket'
 
 const Socket = (props) => {
     const dispatch = useDispatch()
-    const [connected, setConnection] = useState(false)
+    const { connected } = useSelector(state => state.socket)
 
     useEffect(() => {
-        const ws = socket()
-        ws.onConnect((e) => {
-            console.log('onConnect:', e)
-            dispatch(createSocket(ws))
-            setConnection(true)
-        })
-
-        ws.onDisconnect((e) => {
-            console.log('onDisconnect:', e)
-        })
-
-        ws.onError((e) => {
-            console.log('onError:', e)
-        })
-
+        let socket
+        const onClose = (e) => {
+            if (e) console.log('close', e)
+            if (e?.code !== 3500) {
+                const url = `${window.config.socket_url}?authorization=${window.config.token}`
+                socket = new WebSocket(url)
+                socket.addEventListener('close', onClose)
+                socket.addEventListener('error', (e) => dispatch(onError(e)))
+                socket.addEventListener('message', (e) => dispatch(onMessage(e)))
+                socket.addEventListener('open', (e) => dispatch(onConnect(socket, e)))
+            }
+        }
+        onClose()
+        return () => socket.close(3500)
     }, [dispatch])
 
     return (
-        <React.Fragment>
+        <>
             {console.log('Socket')}
             {connected && props.children}
-        </React.Fragment>
+        </>
     )
 }
 

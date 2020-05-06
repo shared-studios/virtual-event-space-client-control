@@ -1,25 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './styles.module.css'
-import { axios } from '../custom-module'
+import ApprovedSVG from './approved-svg'
+import PendingSVG from './pending-svg'
+import moment from 'moment/moment'
+import { approveComment } from '../actions/comments'
+import { useDispatch } from 'react-redux'
+// import { axios } from '../custom-module'
 
-const CommentCard = ({ msg }) => {
-    const { message, user_name, time_stamp } = msg
-    const [approved, setApproved] = useState(msg.approved)
-
-    const handleChange = () => {
-        axios.patch(`message/${time_stamp}/${!approved}`)
-            .then(() => {
-                setApproved(!approved)
-            }).catch((error) => {
-                console.log(error)
-            })
-    }
+const CommentCard = ({ time_stamp, first_name, last_name, comment, approved }) => {
+    const dispatch = useDispatch()
 
     return (
-        <div className={styles.message} >
-            {console.log('message')}
-            <div className={`${styles.text} ${styles[`${approved ? 'approved' : 'denied'}`]}`} onClick={handleChange}>{message}</div>
-            <div className={styles.user_name}>{user_name}</div>
+        <div className={styles.comment} onClick={() => dispatch(approveComment(time_stamp, !approved))}>
+            {console.log('CommentCard')}
+            <div className={styles.time}>{moment(time_stamp).format('hh:mm A')} {approved ? <ApprovedSVG /> : <PendingSVG />}</div>
+            <p className={styles.text}><span className={styles.user_name}>{first_name} {last_name.charAt(0)}.: </span>{comment}</p>
         </div >
     )
 }

@@ -1,8 +1,8 @@
 
-export default (state = null, { type, payload }) => {
+export default (state = { connected: false }, { type, payload }) => {
     switch (type) {
-        case "CREATE-SOCKET": {
-            return payload
+        case "SOCKET-CONNECTED": {
+            return { connected: true }
         }
         default: {
             return state
