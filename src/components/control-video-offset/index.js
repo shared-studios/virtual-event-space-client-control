@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './styles.module.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateVideoOffset, updateVideoOffsetCustom } from '../actions/event'
-import moment from 'moment/moment';
+import moment from 'moment/moment'
 import Vimeo from '@vimeo/player'
 
 const VideoControl = () => {

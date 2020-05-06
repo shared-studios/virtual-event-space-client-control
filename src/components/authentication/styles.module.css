@@ -1,0 +1,12 @@
+.authorize {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.message {
+    color: rgb(14, 14, 14);
+    font-size: 1.5rem;
+}
