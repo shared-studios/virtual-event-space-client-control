@@ -16,12 +16,6 @@ const VideoControl = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (player) {
-            player.getCurrentTime().then(updateDuration)
-        }
-    }, [video_offset, player])
-
-    useEffect(() => {
         if (video_url) {
             const VimeoPlayer = new Vimeo(iframe.current, { url: video_url })
             setPlayer(VimeoPlayer)
@@ -80,7 +74,9 @@ const VideoControl = () => {
             {console.log('VideoControl')}
             <h4>Video Control:</h4>
             <div className={styles.live_video} ref={iframe} />
-            <label className={styles.label}>Duration Offset (sec): {video_offset[segment]}</label>
+            <label className={styles.label}>
+                Duration Offset (hh:mm:ss): {segment && `${duration.hr}:${duration.min}:${duration.sec}`}
+            </label>
             <select className={styles.select} value={segment} onChange={handleChange}>
                 <option value=''>select a segment...</option>
                 {Object.keys(video_offset).map((segment, i) => <option key={i} value={segment}>{segment}</option>)}
