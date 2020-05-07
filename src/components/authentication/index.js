@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles.module.css'
 import Loading from '../loading'
 import { Route } from "react-router-dom"
@@ -6,26 +6,42 @@ import { authorizeUser } from '../actions/authorize'
 import { useDispatch, useSelector } from "react-redux"
 
 const Authentication = ({ component: Component, ...rest }) => {
+    const [password, setPassword] = useState()
     const { event_id, user_id } = rest.computedMatch.params
+    const { authenticated, loading, message } = useSelector(state => state.user)
     const dispatch = useDispatch()
-    const { authenticated, loading, message, type } = useSelector(state => state.user)
 
     useEffect(() => {
-        dispatch(authorizeUser(event_id, user_id))
+        // dispatch(authorizeUser(event_id, user_id))
     }, [dispatch, event_id, user_id])
+    const handleLogin = () => {
+        dispatch({ type: 'AUTHENTICATING' })
+        dispatch(authorizeUser(event_id, user_id, password))
+    }
 
     return <Route {...rest} render={props => {
         console.log('Authentication')
-        if (loading) {
+        if (!authenticated) {
+            return <div className={styles.authorize}>
+                <span>
+                    <input className={styles.password} type='text' placeholder='Please enter your password' value={password}
+                        onChange={({ target }) => setPassword(target.value)} /><br />
+                    <button
+                        className={styles.login_button}
+                        onClick={handleLogin}
+                        disabled={!password}>
+                        Login{loading && '...'}
+                    </button>
+                </span>
+            </div >
+        } else if (loading) {
             return <Loading />
-        } else if (authenticated && type === 'admin') {
+        } else if (authenticated) {
             return <Component {...props} />
-        } else if (type !== 'admin') {
-            return <p className={styles.message}>you are not authorized.</p>
         } else if (message) {
-            return <p className={styles.message}>{message}</p>
+            return <div className={styles.authorize}><p className={styles.message}>{message}</p></div>
         } else {
-            return <p className={styles.message}>an unknown error occurred.</p>
+            return <div className={styles.authorize}><p className={styles.message}>an unknown error occurred.</p></div>
         }
     }} />
 };

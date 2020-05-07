@@ -17,10 +17,6 @@ const AgendaControl = () => {
         setCurrentAgenda(agendas[current])
     }, [agendas, current])
 
-    const handleChange = (e) => {
-        setAgenda(e.target.value)
-    }
-
     const handlePublish = () => {
         dispatch(updateCurrentAgenda(agenda))
         setAgenda()
@@ -30,7 +26,7 @@ const AgendaControl = () => {
         <div className={styles.agenda}>
             {console.log('AgendaControl')}
             <label className={styles.label}>Current Agenda: {currentAgenda?.time} {currentAgenda?.title}</label>
-            <select className={styles.select} value={currentAgenda?.index} onChange={handleChange}>
+            <select className={styles.select} value={currentAgenda?.index} onChange={(e) => setAgenda(e.target.value)}>
                 {agendas.map(({ id, title, time }) => <option key={id} value={id}>{time} {title}</option>)}
             </select>
             <button className={styles.publish_button} onClick={handlePublish} disabled={!agenda}>
