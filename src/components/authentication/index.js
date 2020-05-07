@@ -18,9 +18,9 @@ const Authentication = ({ component: Component, ...rest }) => {
         console.log('Authentication')
         if (loading) {
             return <Loading />
-        } else if (authenticated && type === 'comment-approver') {
+        } else if (authenticated && type === 'admin') {
             return <Component {...props} />
-        } else if (type !== 'comment-approver') {
+        } else if (type !== 'admin') {
             return <p className={styles.message}>you are not authorized.</p>
         } else if (message) {
             return <p className={styles.message}>{message}</p>

@@ -5,8 +5,8 @@ import { fetchAgendas, updateCurrentAgenda } from '../actions/agendas'
 
 const AgendaControl = () => {
     const [agenda, setAgenda] = useState()
+    const { agendas, loading, current } = useSelector(state => state.agendas)
     const [currentAgenda, setCurrentAgenda] = useState()
-    const { agendas, loading } = useSelector(state => state.agendas)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -14,9 +14,8 @@ const AgendaControl = () => {
     }, [dispatch])
 
     useEffect(() => {
-        const agenda = agendas.find((agenda) => agenda.status === 'current')
-        setCurrentAgenda(agenda)
-    }, [agendas])
+        setCurrentAgenda(agendas[current])
+    }, [agendas, current])
 
     const handleChange = (e) => {
         setAgenda(e.target.value)
@@ -30,7 +29,7 @@ const AgendaControl = () => {
     return (
         <div className={styles.agenda}>
             {console.log('AgendaControl')}
-            <label className={styles.label}>Agendas: {currentAgenda?.time} {currentAgenda?.title}</label>
+            <label className={styles.label}>Current Agenda: {currentAgenda?.time} {currentAgenda?.title}</label>
             <select className={styles.select} value={currentAgenda?.index} onChange={handleChange}>
                 {agendas.map(({ id, title, time }) => <option key={id} value={id}>{time} {title}</option>)}
             </select>
