@@ -10,9 +10,8 @@ const VideoControl = () => {
     const [segment, setSegment] = useState()
     const [player, setPlayer] = useState()
     const [selectedField, setSelectedField] = useState()
-    const [duration, setDuration] = useState({ 'hr': 0, 'min': 0, 'sec': 0 })
-    const event = useSelector(state => state.event)
-    const { video_url, video_offset, loading, custom_loading } = event
+    const [duration, setDuration] = useState()
+    const { video_url, video_offset, loading, custom_loading } = useSelector(state => state.event)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -23,21 +22,19 @@ const VideoControl = () => {
         }
     }, [video_url])
 
-    const updateDuration = (seconds) => {
+    const formatDuration = (seconds) => {
         const hours = moment.duration(seconds, 'seconds').hours()
         const minute = moment.duration(seconds, 'seconds').minutes()
         const second = moment.duration(seconds, 'seconds').seconds()
-        setDuration({ 'hr': hours, 'min': minute, 'sec': second })
+        return `${hours}:${minute}:${second}`
     }
-
     const handleChange = ({ target: { value } }) => {
         setSegment(value)
-        updateDuration(video_offset[value])
+        setDuration(moment.duration(video_offset[value].duration, 'seconds').asSeconds())
     }
 
     const handlePublish = () => {
-        const { hr, min, sec } = duration
-        const offset_value = moment.duration({ hours: hr, minutes: min, seconds: sec }).asSeconds()
+        const offset_value = moment.duration(duration, 'seconds').asSeconds()
         dispatch(updateVideoOffsetCustom(segment, offset_value))
     }
 
@@ -52,20 +49,13 @@ const VideoControl = () => {
     }
 
     const changeDuration = (operation) => {
+        const dur = moment.duration(duration, 'seconds')
         if (operation === 'sub') {
-            if (selectedField) {
-                const value = duration[selectedField] - 1
-                setDuration({ ...duration, [selectedField]: value >= 0 ? value : 0 })
-            } else {
-                const value = duration.sec - 1
-                setDuration({ ...duration, sec: value >= 0 ? value : 0 })
-            }
+            dur.subtract(1, selectedField || 'second')
+            setDuration(dur.milliseconds >= 0 ? dur : 0)
         } else {
-            if (selectedField) {
-                setDuration({ ...duration, [selectedField]: duration[selectedField] + 1 })
-            } else {
-                setDuration({ ...duration, sec: duration.sec + 1 })
-            }
+            dur.add(1, selectedField || 'second')
+            setDuration(dur)
         }
     }
 
@@ -75,48 +65,59 @@ const VideoControl = () => {
             <h4>Video Control:</h4>
             <div className={styles.live_video} ref={iframe} />
             <label className={styles.label}>
-                Duration Offset (hh:mm:ss): {segment && `${duration.hr}:${duration.min}:${duration.sec}`}
+                Total duration of the event before <b>{segment ? video_offset[segment]?.name : '--'} </b>
+                video: {segment ? formatDuration(video_offset[segment]?.duration) : '-:-:-'}
             </label>
             <select className={styles.select} value={segment} onChange={handleChange}>
                 <option value=''>select a segment...</option>
-                {Object.keys(video_offset).map((segment, i) => <option key={i} value={segment}>{segment}</option>)}
+                {video_offset.map(({ name }, i) => <option key={i} value={i}>{name} video</option>)}
             </select>
             {segment && <>
                 <button
-                    className={`${styles.current_duration} ${styles.button}`}
+                    className={`${styles.current_duration} ${styles.button} `}
                     onClick={publishCurrentDuration}>
                     Publish Current Duration{loading && '...'}
                 </button>
+                {console.log(duration)}
+                <br />
+                <br />
+                <h4>Manual time input:</h4>
                 <div className={styles.duration}>
                     <button className={styles.duration_button} onClick={() => changeDuration('sub')}>-</button>
                     <div
-                        className={`${styles.field} ${selectedField === 'hr' && styles.selected_field}`}
-                        onClick={() => setSelectedField('hr')}>
-                        {duration.hr} hr
+                        className={`${styles.field} ${selectedField === 'hour' && styles.selected_field} `}
+                        onClick={() => setSelectedField('hour')}>
+                        {moment.duration(duration, 'seconds').hours()} hr
                     </div>
                     <div
-                        className={`${styles.field} ${selectedField === 'min' && styles.selected_field}`}
-                        onClick={() => setSelectedField('min')}>
-                        {duration.min} min
+                        className={`${styles.field} ${selectedField === 'minute' && styles.selected_field} `}
+                        onClick={() => setSelectedField('minute')}>
+                        {moment.duration(duration, 'seconds').minutes()} min
                     </div>
                     <div
-                        className={`${styles.field} ${selectedField === 'sec' && styles.selected_field}`}
-                        onClick={() => setSelectedField('sec')}>
-                        {duration.sec} sec
+                        className={`${styles.field} ${selectedField === 'second' && styles.selected_field} `}
+                        onClick={() => setSelectedField('second')}>
+                        {moment.duration(duration, 'seconds').seconds()} sec
                     </div>
                     <button className={styles.duration_button} onClick={changeDuration}>+</button>
                     <button
-                        className={`${styles.get_current_duration} ${styles.button}`}
-                        onClick={() => player.getCurrentTime().then(updateDuration)}>
+                        className={`${styles.get_current_duration} ${styles.button} `}
+                        onClick={() => player.getCurrentTime().then((s) => setDuration(s))}>
                         Get Current Duration
                     </button>
                     <button
-                        className={`${styles.publish} ${styles.button}`}
+                        className={`${styles.publish} ${styles.button} `}
                         onClick={handlePublish}
-                        disabled={!segment}>
-                        Publish{custom_loading && '...'}
+                        disabled={video_offset[segment].duration === moment.duration(duration, 'seconds').asSeconds()}>
+                        Update Time{custom_loading && '...'}
                     </button>
                 </div>
+                <button
+                    className={`${styles.get_current_duration} ${styles.button} `}
+                    onClick={() => dispatch(updateVideoOffset(segment, 0))}
+                    disabled={!segment}>
+                    Reset Current Duration
+                </button>
             </>}
         </div>
     )

@@ -16,7 +16,7 @@ const CommentsList = () => {
         <div className={styles.comments}>
             <h4>Comments:</h4>
             {console.log('comments')}
-            {comments.map((comment, i) => <Comment key={i} {...comment} />)}
+            {comments.length > 0 ? comments.map((comment, i) => <Comment key={i} {...comment} />) : 'no comments'}
         </div >
     )
 }
