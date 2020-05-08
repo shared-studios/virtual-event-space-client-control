@@ -4,10 +4,10 @@ export default (state = [], { type, payload }) => {
         case "FETCH-COMMENTS_FULFILLED": {
             return payload.data
         } case "APPROVE-COMMENT_FULFILLED": {
-            const { time_stamp, approved } = payload.data
+            const { time_stamp, status } = payload.data
             state = state.map((comment) => {
                 if (comment.time_stamp === time_stamp) {
-                    return { ...comment, approved }
+                    return { ...comment, status }
                 }
                 return comment
             })

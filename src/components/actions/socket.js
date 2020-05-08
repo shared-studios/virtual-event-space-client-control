@@ -12,6 +12,6 @@ export const onMessage = (e) => {
     console.log('onMessage:', e)
     return (dispatch) => {
         const { data, action } = JSON.parse(e.data)
-        if (action === 'approve-comment') dispatch({ type: 'NEW_COMMENT', payload: data })
+        if (action === 'comment') dispatch({ type: 'NEW_COMMENT', payload: data })
     }
 }

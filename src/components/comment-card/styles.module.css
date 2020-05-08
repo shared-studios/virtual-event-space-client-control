@@ -4,14 +4,6 @@
     padding: 1rem 0.5rem;
 }
 
-.comment:hover {
-    cursor: pointer
-}
-
-.comment:active {
-    background-color: rgb(228, 228, 228);
-}
-
 .comment:first-child {
     margin-top: 4.5rem;
 }
@@ -49,4 +41,33 @@
     margin-left: 0.5rem;
     border-radius: 0.3rem;
     opacity: 0.45;
+}
+
+.button {
+    margin-top: 1rem;
+    width: 4rem;
+    height: 2rem;
+    margin-right: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    color: white;
+    outline: none;
+}
+
+.button:active {
+    opacity: 80%;
+}
+
+.button:disabled {
+    background-color: rgb(146, 146, 146);
+    cursor: not-allowed;
+}
+
+.approve {
+    background-color: rgb(99, 205, 50);
+}
+
+.reject {
+    background-color: rgb(231, 76, 76);
 }
