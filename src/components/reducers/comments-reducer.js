@@ -1,20 +1,21 @@
 
-export default (state = [], { type, payload }) => {
+export default (state = {}, { type, payload }) => {
     switch (type) {
         case "FETCH-COMMENTS_FULFILLED": {
-            return payload.data
-        } case "APPROVE-COMMENT_FULFILLED": {
-            const { time_stamp, status } = payload.data
-            state = state.map((comment) => {
-                if (comment.time_stamp === time_stamp) {
-                    return { ...comment, status }
-                }
-                return comment
+            payload.data.forEach(comment => {
+                const { time_stamp } = comment
+                state[time_stamp] = comment
             })
-            return [...state]
+            return { ...state }
+        } case "APPROVE-COMMENT_FULFILLED": {
+            const { time_stamp } = payload.data
+            state[time_stamp] = payload.data
+            return { ...state }
         }
-        case 'NEW_COMMENT': {
-            return [payload, ...state]
+        case 'UPDATE-COMMENT': {
+            const { time_stamp } = payload
+            state[time_stamp] = payload
+            return { ...state }
         }
         default: {
             return state

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const CommentsList = () => {
     const dispatch = useDispatch()
-    const comments = useSelector(state => state.comments)
+    const comments = useSelector(state => Object.values(state.comments))
 
     useEffect(() => {
         dispatch(fetchComments())
