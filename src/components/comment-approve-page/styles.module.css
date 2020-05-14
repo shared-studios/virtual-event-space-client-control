@@ -1,4 +1,5 @@
 .approver_page {
+    width: 100%;
     overflow-y: auto;
     padding: 1rem;
 }

@@ -1,15 +1,15 @@
 import { axios } from '../custom-module'
 
-export const updateVideoOffset = (segment_id, offset_value) => {
+export const updateVideoOffset = (video_id, offset_duration, type) => {
     return (dispatch) => dispatch({
-        type: 'UPDATE-VIDEO-OFFSET',
-        payload: axios.patch('events/video-offset', { segment_id, offset_value }, { headers: { "Content-Type": "application/json" } })
+        type: `UPDATE-VIDEO-OFFSET-DURATION${type}`,
+        payload: axios.patch('events/video-offset', { video_id, offset_duration }, { headers: { "Content-Type": "application/json" } })
+    })
+}
+export const updateCurrentVideoId = (current_video) => {
+    return (dispatch) => dispatch({
+        type: 'UPDATE-CURRENT-VIDEO-ID',
+        payload: axios.patch(`events/video-offset/${current_video}`)
     })
 }
 
-export const updateVideoOffsetCustom = (segment_id, offset_value) => {
-    return (dispatch) => dispatch({
-        type: 'UPDATE-VIDEO-OFFSET-CUSTOM',
-        payload: axios.patch('events/video-offset', { segment_id, offset_value }, { headers: { "Content-Type": "application/json" } })
-    })
-}

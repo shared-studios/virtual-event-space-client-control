@@ -43,11 +43,11 @@
     opacity: 80%;
 }
 
-.current_duration {
+.current_time_input {
     background-color: rgb(4, 169, 4);
 }
 
-.duration {
+.manual_time_input {
     width: max-content;
     display: grid;
     grid-auto-flow: column;
@@ -104,4 +104,12 @@
     grid-column: 1/6;
     grid-row: 3;
     background-color: rgb(4, 169, 4);
+}
+
+.start {
+    background-color: rgb(4, 169, 4);
+}
+
+.stop {
+    background-color: rgb(231, 76, 76);
 }

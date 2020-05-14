@@ -1,4 +1,5 @@
 .control_page {
-    overflow-y: scroll;
+    max-width: 50rem;
+    overflow-y: auto;
     padding: 1rem;
 }

@@ -1,32 +1,56 @@
-export default (state = { video_offset: [], loading: false, custom_loading: false }, { type, payload }) => {
+export default (state = {
+    video_offset: { current_id: null, list: [] },
+    loading: false,
+    custom_loading: false,
+    current_video_loading: false
+}, { type, payload }) => {
     switch (type) {
         case "FETCH-EVENT_FULFILLED": {
-            return { ...state, ...payload }
+            return Object.assign({}, state, payload)
         }
-        case 'UPDATE-VIDEO-OFFSET_FULFILLED': {
-            const { id, duration } = payload.data
-            state.video_offset = state.video_offset.map((video) => {
-                if (video.id === id) return { ...video, duration }
-                return video
+        case "UPDATE-CURRENT-VIDEO-ID_FULFILLED": {
+            return Object.assign({}, state, {
+                current_video_loading: false,
+                video_offset: Object.assign({}, state.video_offset, {
+                    current_video: payload.data
+                })
             })
-            return { ...state, loading: false }
         }
-        case 'UPDATE-VIDEO-OFFSET-CUSTOM_FULFILLED': {
-            const { id, duration } = payload.data
-            state.video_offset = state.video_offset.map((video) => {
-                if (video.id === id) return { ...video, duration }
-                return video
-            })
-            return { ...state, custom_loading: false }
+        case "UPDATE-CURRENT-VIDEO-ID_PENDING": {
+            return pending(state, 'current_video_loading')
         }
-        case 'UPDATE-VIDEO-OFFSET_PENDING': {
-            return { ...state, loading: true }
+        case 'UPDATE-VIDEO-OFFSET-DURATION_FULFILLED': {
+            return updateVideoOffsetDuration(state, payload, 'loading')
         }
-        case 'UPDATE-VIDEO-OFFSET-CUSTOM_PENDING': {
-            return { ...state, custom_loading: true }
+        case 'UPDATE-VIDEO-OFFSET-DURATION-CUSTOM_FULFILLED': {
+            return updateVideoOffsetDuration(state, payload, 'custom_loading')
+        }
+        case 'UPDATE-VIDEO-OFFSET-DURATION_PENDING': {
+            return pending(state, 'loading')
+        }
+        case 'UPDATE-VIDEO-OFFSET-DURATION-CUSTOM_PENDING': {
+            return pending(state, 'custom_loading')
         }
         default: {
             return state
         }
     }
+}
+
+const pending = (state, type) => Object.assign({}, state, { [type]: true })
+
+const updateVideoOffsetDuration = (state, payload, type) => {
+    const { id, offset_duration } = payload.data
+    return Object.assign({}, state, {
+        [type]: false,
+        video_offset: Object.assign({}, state.video_offset, {
+            list: state.video_offset.list.map((video) => {
+                if (video.id === id) {
+                    return { ...video, offset_duration }
+                } else {
+                    return video
+                }
+            })
+        })
+    })
 }
