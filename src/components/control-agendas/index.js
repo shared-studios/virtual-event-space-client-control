@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchAgendas, updateCurrentAgenda } from '../actions/agendas'
+import { updateCurrentAgenda } from '../actions/agendas'
 
 const AgendaControl = () => {
     const [agenda, setAgenda] = useState()
     const { agendas, loading, current } = useSelector(state => state.agendas)
     const dispatch = useDispatch()
 
-    useEffect(() => dispatch(fetchAgendas()), [dispatch])
     useEffect(() => setAgenda(), [current])
 
     return (

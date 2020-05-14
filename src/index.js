@@ -4,8 +4,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from "react-redux"
 import store from "./components/store"
 import Header from './components/header'
-import ControlPage from './components/controller-page'
-import CommentApprovePage from './components/comment-approve-page'
+import MainPage from './main-page'
 import { Route, HashRouter, Switch } from "react-router-dom"
 import configure from './components/custom-module'
 import Error from './components/error'
@@ -22,8 +21,7 @@ const App = () => {
       <HashRouter>
         <Header />
         <Switch>
-          <Authentication path="/control/:event_id/:user_id" exact component={ControlPage} />
-          <Authentication path="/approver/:event_id/:user_id" exact component={CommentApprovePage} />
+          <Authentication path="/:event_id/:user_id" exact component={MainPage} />
           <Route path="/" component={() => <h1>404</h1>} />
         </Switch>
       </HashRouter>
