@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateVideoOffset } from '../actions/event'
+import { updateVideoOffsetCustom } from '../actions/event'
 import moment from 'moment/moment'
 
 const ManualTimeInput = ({ videoId, player }) => {
@@ -11,10 +11,12 @@ const ManualTimeInput = ({ videoId, player }) => {
     const custom_loading = useSelector(state => state.event.custom_loading)
     const dispatch = useDispatch()
 
+    useEffect(() => setDuration(video.offset_duration), [video])
+
     const handlePublish = () => {
         const offsetDuration = moment.duration(duration, 'seconds').asSeconds()
         console.log(offsetDuration)
-        dispatch(updateVideoOffset(video.id, offsetDuration, '-CUSTOM'))
+        dispatch(updateVideoOffsetCustom(video.id, offsetDuration))
     }
 
     const changeDuration = (operation) => {

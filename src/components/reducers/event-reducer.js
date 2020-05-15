@@ -1,5 +1,5 @@
 export default (state = {
-    video_offset: { current_id: null, list: [] },
+    video_offset: { current_video: null, list: [] },
     loading: false,
     custom_loading: false,
     current_video_loading: false
@@ -16,21 +16,18 @@ export default (state = {
                 })
             })
         }
-        case "UPDATE-CURRENT-VIDEO-ID_PENDING": {
-            return pending(state, 'current_video_loading')
-        }
         case 'UPDATE-VIDEO-OFFSET-DURATION_FULFILLED': {
             return updateVideoOffsetDuration(state, payload, 'loading')
         }
         case 'UPDATE-VIDEO-OFFSET-DURATION-CUSTOM_FULFILLED': {
             return updateVideoOffsetDuration(state, payload, 'custom_loading')
         }
-        case 'UPDATE-VIDEO-OFFSET-DURATION_PENDING': {
-            return pending(state, 'loading')
-        }
-        case 'UPDATE-VIDEO-OFFSET-DURATION-CUSTOM_PENDING': {
-            return pending(state, 'custom_loading')
-        }
+        case 'UPDATE-VIDEO-OFFSET-DURATION_PENDING': return pending(state, 'loading')
+        case 'UPDATE-VIDEO-OFFSET-DURATION_REJECTED': return pending(state, 'loading')
+        case "UPDATE-CURRENT-VIDEO-ID_PENDING": return pending(state, 'current_video_loading')
+        case "UPDATE-CURRENT-VIDEO-ID_REJECTED": return pending(state, 'current_video_loading')
+        case 'UPDATE-VIDEO-OFFSET-DURATION-CUSTOM_PENDING': return pending(state, 'custom_loading')
+        case 'UPDATE-VIDEO-OFFSET-DURATION-CUSTOM_REJECTED': return pending(state, 'custom_loading')
         default: {
             return state
         }

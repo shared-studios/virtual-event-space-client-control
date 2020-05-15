@@ -64,13 +64,13 @@ const VideoControl = () => {
                     <button
                         className={`${styles.start} ${styles.button} `}
                         onClick={() => dispatch(updateCurrentVideoId(videoId))}>
-                        Start{current_video_loading && '...'}
+                        Publish{current_video_loading && '...'}
                     </button>
                     :
                     <button
                         className={`${styles.stop} ${styles.button} `}
                         onClick={() => dispatch(updateCurrentVideoId('null'))}>
-                        Stop{current_video_loading && '...'}
+                        Unpublish{current_video_loading && '...'}
                     </button>
                 }
             </>}

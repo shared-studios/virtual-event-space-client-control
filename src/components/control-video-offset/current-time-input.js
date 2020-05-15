@@ -14,14 +14,14 @@ const CurrentTimeInput = ({ videoId, player }) => {
             const minutes = moment.duration(duration, 'seconds').minutes()
             const seconds = moment.duration(duration, 'seconds').seconds()
             const offsetDuration = moment.duration({ hours, minutes, seconds }).asSeconds()
-            dispatch(updateVideoOffset(videoId, offsetDuration, ''))
+            dispatch(updateVideoOffset(videoId, offsetDuration))
         })
     }
 
     return <button
         className={`${styles.current_time_input} ${styles.button} `}
         onClick={publishCurrentDuration}>
-        Publish Current Duration{loading && '...'}
+        Cue{loading && '...'}
     </button>
 
 }
