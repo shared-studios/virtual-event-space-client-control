@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/virtual-event-space-client-control/static/css/main.d0e51f16.chunk.css",
-    "main.js": "/virtual-event-space-client-control/static/js/main.ef5588c1.chunk.js",
-    "main.js.map": "/virtual-event-space-client-control/static/js/main.ef5588c1.chunk.js.map",
+    "main.js": "/virtual-event-space-client-control/static/js/main.aaf7376a.chunk.js",
+    "main.js.map": "/virtual-event-space-client-control/static/js/main.aaf7376a.chunk.js.map",
     "runtime-main.js": "/virtual-event-space-client-control/static/js/runtime-main.3df4e139.js",
     "runtime-main.js.map": "/virtual-event-space-client-control/static/js/runtime-main.3df4e139.js.map",
     "static/js/2.ee02130d.chunk.js": "/virtual-event-space-client-control/static/js/2.ee02130d.chunk.js",
     "static/js/2.ee02130d.chunk.js.map": "/virtual-event-space-client-control/static/js/2.ee02130d.chunk.js.map",
     "index.html": "/virtual-event-space-client-control/index.html",
-    "precache-manifest.bf4618aded32694c3eb54476df6b0b6b.js": "/virtual-event-space-client-control/precache-manifest.bf4618aded32694c3eb54476df6b0b6b.js",
+    "precache-manifest.08163f539e0a0a06aa59ce79b8a9f132.js": "/virtual-event-space-client-control/precache-manifest.08163f539e0a0a06aa59ce79b8a9f132.js",
     "service-worker.js": "/virtual-event-space-client-control/service-worker.js",
     "static/css/main.d0e51f16.chunk.css.map": "/virtual-event-space-client-control/static/css/main.d0e51f16.chunk.css.map",
     "static/js/2.ee02130d.chunk.js.LICENSE.txt": "/virtual-event-space-client-control/static/js/2.ee02130d.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.3df4e139.js",
     "static/js/2.ee02130d.chunk.js",
     "static/css/main.d0e51f16.chunk.css",
-    "static/js/main.ef5588c1.chunk.js"
+    "static/js/main.aaf7376a.chunk.js"
   ]
 }
