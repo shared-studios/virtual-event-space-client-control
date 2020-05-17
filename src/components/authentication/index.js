@@ -6,7 +6,7 @@ import { authorizeUser } from '../actions/authorize'
 import { useDispatch, useSelector } from "react-redux"
 
 const Authentication = ({ component: Component, ...rest }) => {
-    const [password, setPassword] = useState('U2lhbQ==')
+    const [password, setPassword] = useState("U2lhbQ==")
     const { event_id, user_id } = rest.computedMatch.params
     const { authenticated, loading, message } = useSelector(state => state.user)
     const dispatch = useDispatch()

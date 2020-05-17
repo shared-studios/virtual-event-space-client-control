@@ -23,7 +23,7 @@ const VideoControl = () => {
 
     useEffect(() => {
         if (video_url) {
-            const VimeoPlayer = new Vimeo(iframe.current, { url: 'https://player.vimeo.com/video/415106794' })
+            const VimeoPlayer = new Vimeo(iframe.current, { url: video_url })
             setPlayer(VimeoPlayer)
             VimeoPlayer.play()
         }

@@ -5,7 +5,7 @@ import { updateVideoOffsetCustom } from '../actions/event'
 import moment from 'moment/moment'
 
 const ManualTimeInput = ({ videoId, player }) => {
-    const [selectedField, setSelectedField] = useState()
+    const [selectedField, setSelectedField] = useState('seconds')
     const video = useSelector(state => state.event.video_offset.list[videoId])
     const [duration, setDuration] = useState(video.offset_duration)
     const custom_loading = useSelector(state => state.event.custom_loading)
@@ -22,12 +22,14 @@ const ManualTimeInput = ({ videoId, player }) => {
     const changeDuration = (operation) => {
         const dur = moment.duration(duration, 'seconds')
         if (operation === 'sub') {
-            dur.subtract(1, selectedField || 'second')
-            setDuration(dur.milliseconds >= 0 ? dur : 0)
+            dur.subtract(1, selectedField)
+            setDuration(dur.asMilliseconds() >= 0 ? dur : 0)
         } else {
-            dur.add(1, selectedField || 'second')
+            dur.add(1, selectedField)
             setDuration(dur)
         }
+        console.log(selectedField)
+
     }
 
     return (
